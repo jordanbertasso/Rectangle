@@ -9,7 +9,7 @@
 import Cocoa
 import ServiceManagement
 import Sparkle
-import MASShortcut
+import KeyboardShortcuts
 
 class SettingsViewController: NSViewController {
         
@@ -28,8 +28,8 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var todoView: NSStackView!
     @IBOutlet weak var todoAppWidthField: AutoSaveFloatField!
     @IBOutlet weak var todoAppSidePopUpButton: NSPopUpButton!
-    @IBOutlet weak var toggleTodoShortcutView: MASShortcutView!
-    @IBOutlet weak var reflowTodoShortcutView: MASShortcutView!
+    @IBOutlet weak var toggleTodoStackView: NSStackView!
+    @IBOutlet weak var reflowTodoStackView: NSStackView!
     @IBOutlet weak var stageView: NSStackView!
     @IBOutlet weak var stageSlider: NSSlider!
     @IBOutlet weak var stageLabel: NSTextField!
@@ -240,8 +240,13 @@ class SettingsViewController: NSViewController {
         todoAppSidePopUpButton.selectItem(withTag: Defaults.todoSidebarSide.value.rawValue)
         TodoManager.initToggleShortcut()
         TodoManager.initReflowShortcut()
-        toggleTodoShortcutView.setAssociatedUserDefaultsKey(TodoManager.toggleDefaultsKey, withTransformerName: MASDictionaryTransformerName)
-        reflowTodoShortcutView.setAssociatedUserDefaultsKey(TodoManager.reflowDefaultsKey, withTransformerName: MASDictionaryTransformerName)
+        
+        let toggleTodoRecorder = KeyboardShortcuts.RecorderCocoa(for: KeyboardShortcuts.Name("toggleTodo"))
+        toggleTodoStackView.addArrangedSubview(toggleTodoRecorder)
+
+        let reflowTodoRecorder = KeyboardShortcuts.RecorderCocoa(for: KeyboardShortcuts.Name("reflowTodo"))
+        reflowTodoStackView.addArrangedSubview(reflowTodoRecorder)
+
         showHideTodoModeSettings()
     }
     

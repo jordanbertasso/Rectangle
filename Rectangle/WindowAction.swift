@@ -9,7 +9,6 @@
 import Foundation
 import Carbon
 import Cocoa
-import MASShortcut
 
 fileprivate let alt = NSEvent.ModifierFlags.option.rawValue
 fileprivate let ctrl = NSEvent.ModifierFlags.control.rawValue
@@ -730,7 +729,8 @@ struct Shortcut: Codable {
     }
     
     func displayString() -> String {
-        let masShortcut = toMASSHortcut()
-        return masShortcut.modifierFlagsString + masShortcut.keyCodeString
+        return ""
+//        let masShortcut = toMASSHortcut()
+//        return masShortcut.modifierFlagsString + masShortcut.keyCodeString
     }
 }

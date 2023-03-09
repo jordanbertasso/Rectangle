@@ -6,7 +6,6 @@
 //  Copyright © 2021 Ryan Hanson. All rights reserved.
 //
 import Cocoa
-import MASShortcut
 
 class ReverseAllManager {
 

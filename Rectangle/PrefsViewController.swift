@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import MASShortcut
+import KeyboardShortcuts
 import ServiceManagement
 
 class PrefsViewController: NSViewController {
@@ -117,8 +117,7 @@ class PrefsViewController: NSViewController {
         }
         
         if Defaults.allowAnyShortcut.enabled {
-            let passThroughValidator = PassthroughShortcutValidator()
-            actionsToViews.values.forEach { $0.shortcutValidator = passThroughValidator }
+            actionsToViews.values.forEach { $0.shortcutValidator = nil }
         }
         
         subscribeToAllowAnyShortcutToggle()
@@ -135,25 +134,9 @@ class PrefsViewController: NSViewController {
     private func subscribeToAllowAnyShortcutToggle() {
         Notification.Name.allowAnyShortcut.onPost { notification in
             guard let enabled = notification.object as? Bool else { return }
-            let validator = enabled ? PassthroughShortcutValidator() : MASShortcutValidator()
+            let validator = enabled ? nil : MASShortcutValidator()
             self.actionsToViews.values.forEach { $0.shortcutValidator = validator }
         }
-    }
-    
-}
-
-class PassthroughShortcutValidator: MASShortcutValidator {
-    
-    override func isShortcutValid(_ shortcut: MASShortcut!) -> Bool {
-        return true
-    }
-    
-    override func isShortcutAlreadyTaken(bySystem shortcut: MASShortcut!, explanation: AutoreleasingUnsafeMutablePointer<NSString?>!) -> Bool {
-        return false
-    }
-    
-    override func isShortcut(_ shortcut: MASShortcut!, alreadyTakenIn menu: NSMenu!, explanation: AutoreleasingUnsafeMutablePointer<NSString?>!) -> Bool {
-        return false
     }
     
 }

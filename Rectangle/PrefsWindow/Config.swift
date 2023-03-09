@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MASShortcut
 
 extension Defaults {
     static func encoded() -> String? {

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MASShortcut
 
 class ShortcutManager {
     

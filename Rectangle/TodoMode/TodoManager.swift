@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MASShortcut
 
 class TodoManager {
     private static var todoWindowId: CGWindowID?
